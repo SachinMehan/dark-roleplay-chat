@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Dark Roleplay Chat Interface (Enhanced + API & BG Fixes)</title>
-  <!-- Google Fonts -->
+ 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
     rel="stylesheet"
   >
-  <!-- Link to external CSS file -->
+ 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Left Sidebar -->
+  
   <div id="sidebar">
     <h2>Menu</h2>
     <div class="nav-links">
@@ -23,9 +23,9 @@
     </div>
   </div>
 
-  <!-- Main Chat Wrapper -->
+  
   <div id="chat-wrapper">
-    <!-- Character Header -->
+    
     <div id="character-header">
       <img id="char-avatar-large" src="https://via.placeholder.com/64?text=C" alt="Character Avatar" />
       <div id="char-info">
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <!-- Collapsible Roleplay Initialization Panel -->
+    
     <div id="roleplay-init">
       <div class="settings-group">
         <h3>Character & User Info</h3>
@@ -87,17 +87,17 @@
         <button id="remove-background-btn">Remove Background</button>
       </div>
 
-      <!-- AI PARAMETERS GROUP -->
+     
       <div class="settings-group">
         <h3>AI Parameters</h3>
-        <!-- Context & Response Length -->
+       
         <label for="max-context">Max Context Length (characters):</label>
         <input type="number" id="max-context" min="100" max="32000" value="1000" />
 
         <label for="max-length">Max Response Length (tokens):</label>
         <input type="number" id="max-length" min="10" max="4096" value="500" />
 
-        <!-- Sampling Parameters -->
+      
         <label for="temperature">Temperature:</label>
         <div class="param-slider-container">
           <input type="range" id="temperature" min="0" max="2" value="0.7" step="0.01" />
@@ -140,13 +140,13 @@
       <button id="init-roleplay-btn">Initialize Roleplay</button>
     </div>
 
-    <!-- Chat Window -->
+   
     <div id="chat-window">
-      <!-- This absolutely positioned div holds the background image -->
+      
       <div id="chat-background"></div>
     </div>
 
-    <!-- Bottom Input Bar -->
+   
     <div id="input-bar">
       <select id="api-selector">
         <option value="openrouter">OpenRouter</option>
@@ -156,14 +156,14 @@
       <button id="send-btn">➤</button>
     </div>
 
-    <!-- Delete Mode Footer -->
+    
     <div id="delete-mode-footer">
       <button id="confirm-delete-btn">Delete</button>
       <button id="delete-cancel-btn">Cancel</button>
     </div>
   </div>
 
-  <!-- Link to external JS file -->
+  
   <script src="script.js"></script>
 </body>
 </html>
