@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dark Roleplay Chat Interface (Enhanced + API & BG Fixes)</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  >
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Left Sidebar -->
+  <div id="sidebar">
+    <h2>Menu</h2>
+    <div class="nav-links">
+      <button id="new-chat-btn">New chat</button>
+      <button id="delete-btn">Delete</button>
+      <button id="settings-btn">Settings</button>
+    </div>
+  </div>
+
+  <!-- Main Chat Wrapper -->
+  <div id="chat-wrapper">
+    <!-- Character Header -->
+    <div id="character-header">
+      <img id="char-avatar-large" src="https://via.placeholder.com/64?text=C" alt="Character Avatar" />
+      <div id="char-info">
+        <h1 id="char-name-display">Character Name</h1>
+        <p id="char-desc-display">Character short description or personality</p>
+      </div>
+    </div>
+
+    <!-- Collapsible Roleplay Initialization Panel -->
+    <div id="roleplay-init">
+      <div class="settings-group">
+        <h3>Character & User Info</h3>
+        <label for="user-name">Your Name:</label>
+        <input type="text" id="user-name" placeholder="Your Name (for addressing you)" />
+
+        <label for="user-description">User Description:</label>
+        <input type="text" id="user-description" placeholder="User Description" />
+
+        <label for="character-name">Character Name:</label>
+        <input type="text" id="character-name" placeholder="Character Name" />
+
+        <label for="character-description">Character Description/Personality:</label>
+        <input type="text" id="character-description" placeholder="Character Description/Personality" />
+
+        <label for="initial-message">Initial Character Greeting:</label>
+        <input type="text" id="initial-message" placeholder="Initial Character Greeting" />
+      </div>
+
+      <div class="settings-group">
+        <h3>Avatars</h3>
+        <label for="user-avatar-input">User Avatar:</label>
+        <input type="file" id="user-avatar-input" accept="image/*" />
+
+        <label for="char-avatar-input">Character Avatar:</label>
+        <input type="file" id="char-avatar-input" accept="image/*" />
+      </div>
+
+      <div class="settings-group">
+        <h3>API Keys & Models</h3>
+        <label for="mistral-api-key">Mistral API Key:</label>
+        <input type="text" id="mistral-api-key" placeholder="Mistral API Key" />
+
+        <label for="mistral-model">Mistral Model:</label>
+        <input type="text" id="mistral-model" placeholder="Mistral Model" />
+
+        <label for="openrouter-api-key">OpenRouter API Key:</label>
+        <input type="text" id="openrouter-api-key" placeholder="OpenRouter API Key" />
+
+        <label for="openrouter-model">OpenRouter Model:</label>
+        <input type="text" id="openrouter-model" placeholder="OpenRouter Model" />
+      </div>
+
+      <div class="settings-group">
+        <h3>Chat Background</h3>
+        <label for="background-image-input">Select Background Image:</label>
+        <input type="file" id="background-image-input" accept="image/*" />
+        <label for="background-blur">Background Blur Level:</label>
+        <input type="range" id="background-blur" min="0" max="20" value="0" step="1" />
+        <button id="remove-background-btn">Remove Background</button>
+      </div>
+
+      <!-- AI PARAMETERS GROUP -->
+      <div class="settings-group">
+        <h3>AI Parameters</h3>
+        <!-- Context & Response Length -->
+        <label for="max-context">Max Context Length (characters):</label>
+        <input type="number" id="max-context" min="100" max="32000" value="1000" />
+
+        <label for="max-length">Max Response Length (tokens):</label>
+        <input type="number" id="max-length" min="10" max="4096" value="500" />
+
+        <!-- Sampling Parameters -->
+        <label for="temperature">Temperature:</label>
+        <div class="param-slider-container">
+          <input type="range" id="temperature" min="0" max="2" value="0.7" step="0.01" />
+          <span id="temperature-value">0.7</span>
+        </div>
+
+        <label for="top-p">Top P:</label>
+        <div class="param-slider-container">
+          <input type="range" id="top-p" min="0" max="1" value="0.9" step="0.01" />
+          <span id="top-p-value">0.9</span>
+        </div>
+
+        <label for="min-p">Min P:</label>
+        <div class="param-slider-container">
+          <input type="range" id="min-p" min="0" max="1" value="0.05" step="0.01" />
+          <span id="min-p-value">0.05</span>
+        </div>
+
+        <label for="top-k">Top K:</label>
+        <div class="param-slider-container">
+          <input type="range" id="top-k" min="1" max="100" value="40" step="1" />
+          <span id="top-k-value">40</span>
+        </div>
+
+        <label for="freq-penalty">Frequency Penalty:</label>
+        <div class="param-slider-container">
+          <input type="range" id="freq-penalty" min="-2" max="2" value="0" step="0.01" />
+          <span id="freq-penalty-value">0</span>
+        </div>
+
+        <label for="rep-penalty">Repetition Penalty:</label>
+        <div class="param-slider-container">
+          <input type="range" id="rep-penalty" min="1" max="2" value="1.1" step="0.01" />
+          <span id="rep-penalty-value">1.1</span>
+        </div>
+
+        <button id="default-params-btn">Reset to Defaults</button>
+      </div>
+
+      <button id="init-roleplay-btn">Initialize Roleplay</button>
+    </div>
+
+    <!-- Chat Window -->
+    <div id="chat-window">
+      <!-- This absolutely positioned div holds the background image -->
+      <div id="chat-background"></div>
+    </div>
+
+    <!-- Bottom Input Bar -->
+    <div id="input-bar">
+      <select id="api-selector">
+        <option value="openrouter">OpenRouter</option>
+        <option value="mistral" selected>Mistral</option>
+      </select>
+      <input type="text" id="message-input" placeholder="Message..." />
+      <button id="send-btn">➤</button>
+    </div>
+
+    <!-- Delete Mode Footer -->
+    <div id="delete-mode-footer">
+      <button id="confirm-delete-btn">Delete</button>
+      <button id="delete-cancel-btn">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Link to external JS file -->
+  <script src="script.js"></script>
+</body>
+</html>
