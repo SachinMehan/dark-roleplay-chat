@@ -1,6 +1,5 @@
 # Dark Roleplay Chat
 
-![Dark Roleplay Chat]
 _A highly customizable, aesthetic roleplay chat interface with AI-powered responses._
 
 ## ⭐ Overview
@@ -63,8 +62,7 @@ Simply **open `index.html`** in a browser.
 
 ## 📸 Screenshots
 
-![Chat Interface](https://your-image-link.com/screenshot1.png)
-![Settings Panel](https://your-image-link.com/screenshot2.png)
+![Chat Interface]([https://your-image-link.com/screenshot1.png](https://ibb.co/nMkJHw0M))
 
 ---
 
