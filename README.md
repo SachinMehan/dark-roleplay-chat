@@ -1,60 +1,84 @@
 # Dark Roleplay Chat
 
-An **immersive, dark-themed** roleplay chat interface that integrates with **Mistral** and **OpenRouter** AI models. This project is split into three files—`index.html`, `style.css`, and `script.js`—for easy customization and maintenance. It features adjustable AI parameters, dynamic background images, and a convenient UI for roleplaying with a custom character.
+![Dark Roleplay Chat]
+_A highly customizable, aesthetic roleplay chat interface with AI-powered responses._
+
+## ⭐ Overview
+Dark Roleplay Chat is an interactive chat front-end designed for **immersive roleplaying**. It provides a sleek dark theme, customizable **AI parameters**, and **dynamic backgrounds** to enhance your storytelling experience. Built with HTML, CSS, and JavaScript, it seamlessly integrates **Mistral/OpenRouter AI models** for a smooth roleplaying session.
 
 ---
 
-## Table of Contents
-1. [Features](#features)
-2. [Installation & Setup](#installation--setup)
-3. [Usage](#usage)
-4. [AI Parameters](#ai-parameters)
-5. [Background & Avatars](#background--avatars)
-6. [Delete Mode](#delete-mode)
-7. [File Structure](#file-structure)
-8. [Contributing](#contributing)
-9. [License](#license)
+## 🚀 Features
+
+✅ **Character Roleplay**: Customize your AI character and user identity  
+✅ **API Integration**: Supports Mistral & OpenRouter API models  
+✅ **AI Samplers & Controls**: Adjust **temperature, top-p, top-k**, response & context lengths  
+✅ **Dynamic Backgrounds**: Upload custom backgrounds that persist through sessions  
+✅ **Message Control**: Delete and regenerate messages 
+✅ **Dark-Themed UI**: Modern and immersive chat interface  
 
 ---
 
-## Features
+## 📁 File Structure
 
-- **Dark Themed UI**  
-  A sleek interface styled with modern color variables for a consistent, moody look.
-
-- **Roleplay Initialization**  
-  Easily set up your character’s name, description, and an initial greeting. The user also has a name and optional avatar.
-
-- **AI Model Integration**  
-  - **Mistral**: Provide your Mistral API key and model name.  
-  - **OpenRouter**: Provide your OpenRouter API key and model name.  
-
-- **Adjustable Parameters**  
-  Sliders for **Temperature**, **Top P**, **Top K**, **Min P**, **Frequency Penalty**, and **Repetition Penalty**, plus **Max Context** and **Max Response** lengths.
-
-- **Background Customization**  
-  Upload an image and apply a blur effect.
-
-- **Retry & Delete**  
-  - **Retry** the most recent AI response.  
-  - **Delete** mode to remove messages from the conversation context.
+```
+Dark-Roleplay-Chat/
+├── index.html       # Main chat UI and structure
+├── style.css        # Styling and dark-themed visuals
+└── script.js        # Logic for chat, API calls, and UI interactions
+```
 
 ---
 
-## Installation & Setup
+## 🔧 Installation & Setup
 
-1. **Clone or Download** this repository:
-   
-   git clone https://github.com/SachinMehan/dark-roleplay-chat.git
-   dark-roleplay-chat/
+### 1️⃣ Clone the Repository
+```sh
+git clone https://github.com/YourUsername/dark-roleplay-chat.git
+cd dark-roleplay-chat
+```
+Or Download the files directly
 
-   Or download the ZIP and extract it.
+### 2️⃣ Open Locally
+Simply **open `index.html`** in a browser.
 
-2. **File Structure** should look like this:
-   
-      ├─ index.html
-      ├─ style.css
-      └─ script.js
+## 🎮 How to Use
+1. Navigate to the **Settings** in the Sidebar in the chat interface.
+2. Enter your **Mistral or OpenRouter API Key** and model name.
+3. **Create Your AI Character**: Define your character’s name, avatar, and Description.
+4. **Create Your Own Persona**: Similarly, Enter your Name and your Description.
+3. **Adjust AI Settings**:
+   - Temperature: Controls randomness of responses.
+   - Top-P & Top-K: Sampling techniques for response generation.
+   - Max Response & Context Length: Limits AI memory & response size.
+4. **Change Background**:
+   - Upload a new background image.
+   - Adjust blur effects for aesthetic.
+5. Click **Initialize Roleplay**: to start chatting!
+6. **Modify Messages**:
+   - `Retry` to regenerate AI response.
+   - `Delete Mode` to remove unwanted messages.
 
-3. **Open** index.html in your favorite browser (Chrome, Firefox, etc.).
+---
 
+## 📸 Screenshots
+
+![Chat Interface](https://your-image-link.com/screenshot1.png)
+![Settings Panel](https://your-image-link.com/screenshot2.png)
+
+---
+
+## ⚠️ Important Notes
+
+- The chat stores session data locally in the browser (no server-side storage).
+- Background images remain until you reset them manually.
+- If buttons become unresponsive, refresh the page and re-initialize settings.
+
+---
+
+## 📜 License
+This project is **open-source** under the [MIT License](LICENSE).
+
+---
+
+### Made with ❤️ by [SachinMehan]
