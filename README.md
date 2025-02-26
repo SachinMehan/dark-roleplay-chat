@@ -62,7 +62,7 @@ Simply **open `index.html`** in a browser.
 
 ## 📸 Screenshots
 
-![Chat Interface](https://i.imghippo.com/files/qUBH9809YNI.png)
+![Chat Interface]([url=https://ibb.co/nMkJHw0M][img]https://i.ibb.co/KxyvM5Gx/Screenshot-2025-02-26-153801.png[/img][/url])
 
 ---
 
