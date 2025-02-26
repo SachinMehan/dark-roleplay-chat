@@ -62,8 +62,6 @@ Simply **open `index.html`** in a browser.
 
 ## 📸 Screenshots
 
-![Chat Interface]
-
 ---![Screenshot 2025-02-26 153801](https://github.com/user-attachments/assets/eb7bbaa9-33eb-4a2a-aa00-aeaad445af48)
 
 
