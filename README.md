@@ -71,11 +71,3 @@ Simply **open `index.html`** in a browser.
 - Background images remain until you reset them manually.
 - If buttons become unresponsive, refresh the page and re-initialize settings.
 
----
-
-## 📜 License
-This project is **open-source** under the [MIT License](LICENSE).
-
----
-
-### Made with ❤️ by [SachinMehan]
