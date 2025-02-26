@@ -1,19 +1,17 @@
-/***************************************************************
- * GLOBALS & STATE
- ***************************************************************/
+
 let conversationHistory = [];
 let currentCharacterName = "Bot";
 let userAvatar = "";
 let charAvatar = "";
 
-// Keep track of all message containers for potential deletion
+
 let messageDomList = [];
-// Delete mode
+
 let isDeleteMode = false;
-// Keep track of selected messages (indices)
+
 let selectedMessages = [];
 
-// AI Parameter object
+
 let aiParams = {
   maxContext: 1000,
   maxLength: 500,
@@ -25,15 +23,13 @@ let aiParams = {
   repetitionPenalty: 1.1
 };
 
-// We'll store the Mistral/OpenRouter keys & models globally
+
 let mistralApiKeyGlobal = "";
 let mistralModelGlobal  = "";
 let openrouterApiKeyGlobal = "";
 let openrouterModelGlobal  = "";
 
-/***************************************************************
- * SIDEBAR BUTTONS
- ***************************************************************/
+
 document.getElementById('settings-btn').addEventListener('click', function() {
   const initPanel = document.getElementById('roleplay-init');
   if (initPanel.style.display === "none" || initPanel.style.display === "") {
@@ -50,7 +46,7 @@ document.getElementById('new-chat-btn').addEventListener('click', function() {
   document.getElementById('chat-window').innerHTML = "<div id='chat-background'></div>";
 });
 
-// Toggle delete mode
+
 document.getElementById('delete-btn').addEventListener('click', function() {
   isDeleteMode = !isDeleteMode;
   selectedMessages = [];
@@ -58,7 +54,7 @@ document.getElementById('delete-btn').addEventListener('click', function() {
   if (!isDeleteMode) removeAllSelections();
 });
 
-// Confirm delete
+
 document.getElementById('confirm-delete-btn').addEventListener('click', function() {
   if (selectedMessages.length === 0) {
     alert("No messages selected to delete.");
@@ -78,7 +74,7 @@ document.getElementById('confirm-delete-btn').addEventListener('click', function
   selectedMessages = [];
 });
 
-// Cancel delete
+
 document.getElementById('delete-cancel-btn').addEventListener('click', function() {
   isDeleteMode = false;
   document.getElementById('delete-mode-footer').style.display = 'none';
@@ -93,9 +89,7 @@ function removeAllSelections() {
   });
 }
 
-/***************************************************************
- * AVATAR UPLOAD
- ***************************************************************/
+
 document.getElementById('user-avatar-input').addEventListener('change', function(e) {
   const file = e.target.files[0];
   if (!file) return;
@@ -116,9 +110,7 @@ document.getElementById('char-avatar-input').addEventListener('change', function
   reader.readAsDataURL(file);
 });
 
-/***************************************************************
- * BACKGROUND IMAGE UPLOAD & BLUR CONTROL
- ***************************************************************/
+
 document.getElementById('background-image-input').addEventListener('change', function(e) {
   const file = e.target.files[0];
   if (!file) return;
@@ -139,9 +131,7 @@ document.getElementById('remove-background-btn').addEventListener('click', funct
   document.getElementById('chat-background').style.filter = 'blur(0px)';
 });
 
-/***************************************************************
- * INIT PARAMETER SLIDERS
- ***************************************************************/
+
 function initParameterSliders() {
   const parameterIds = ['temperature', 'top-p', 'min-p', 'top-k', 'freq-penalty', 'rep-penalty'];
   parameterIds.forEach(id => {
@@ -204,9 +194,7 @@ function resetToDefaultParams() {
   document.getElementById('rep-penalty-value').textContent = defaults.repetitionPenalty;
 }
 
-/***************************************************************
- * TRIM CONVERSATION
- ***************************************************************/
+
 function trimConversationHistory() {
   let totalLength = conversationHistory.reduce((acc, msg) => acc + msg.content.length, 0);
   while (totalLength > aiParams.maxContext && conversationHistory.length > 1) {
@@ -215,9 +203,7 @@ function trimConversationHistory() {
   }
 }
 
-/***************************************************************
- * CALL API (with advanced parameters + fix for Mistral)
- ***************************************************************/
+
 async function callChatAPI(apiName) {
   trimConversationHistory();
 
@@ -259,7 +245,7 @@ async function callChatAPI(apiName) {
     }
 
   } else {
-    // Mistral
+    
     headers["Authorization"] = `Bearer ${mistralApiKeyGlobal}`;
     payload = {
       model: mistralModelGlobal || "mistral-large-latest",
@@ -293,9 +279,7 @@ async function callChatAPI(apiName) {
   }
 }
 
-/***************************************************************
- * APPEND MESSAGE
- ***************************************************************/
+
 function appendMessage(content, className) {
   const container = document.createElement('div');
   container.classList.add('message-container');
@@ -305,7 +289,7 @@ function appendMessage(content, className) {
     container.classList.add('bot');
   }
 
-  // Create avatar element
+ 
   const avatar = document.createElement('img');
   avatar.classList.add('avatar');
   if (className.includes('user-message')) {
@@ -314,12 +298,12 @@ function appendMessage(content, className) {
     avatar.src = charAvatar || 'https://via.placeholder.com/40?text=C';
   }
 
-  // Create bubble
+ 
   const bubble = document.createElement('div');
   bubble.classList.add('message-bubble', className);
   bubble.textContent = content;
 
-  // For bot => avatar then bubble, for user => bubble then avatar
+  
   if (className.includes('user-message')) {
     container.appendChild(bubble);
     container.appendChild(avatar);
@@ -332,10 +316,10 @@ function appendMessage(content, className) {
   chatWindow.appendChild(container);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
-  // Store in a global list
+  
   messageDomList.push(container);
 
-  // On click in delete mode, toggle selection
+  
   bubble.addEventListener('click', () => {
     if (!isDeleteMode) return;
     const idx = messageDomList.indexOf(container);
@@ -352,9 +336,7 @@ function appendMessage(content, className) {
   return bubble;
 }
 
-/***************************************************************
- * ADD RETRY BUTTON
- ***************************************************************/
+
 function addRetryButton(messageBubble) {
   const retryBtn = document.createElement('button');
   retryBtn.textContent = "↻";
@@ -367,7 +349,7 @@ function addRetryButton(messageBubble) {
     }
     conversationHistory.pop();
 
-    // Also remove from the DOM
+  
     const bubbleContainer = messageBubble.parentElement;
     const idx = messageDomList.indexOf(bubbleContainer);
     if (idx >= 0) messageDomList.splice(idx, 1);
@@ -387,9 +369,7 @@ function addRetryButton(messageBubble) {
   messageBubble.appendChild(retryBtn);
 }
 
-/***************************************************************
- * SEND MESSAGE
- ***************************************************************/
+
 document.getElementById('send-btn').addEventListener('click', async function() {
   const messageInput = document.getElementById('message-input');
   const message = messageInput.value.trim();
@@ -410,23 +390,21 @@ document.getElementById('send-btn').addEventListener('click', async function() {
   }
   messageInput.value = "";
 });
-// Enter key to send
+
 document.getElementById('message-input').addEventListener('keyup', function(e) {
   if (e.key === 'Enter') {
     document.getElementById('send-btn').click();
   }
 });
 
-/***************************************************************
- * INITIALIZE ROLEPLAY (Preserve Background, Store API Keys)
- ***************************************************************/
+
 document.getElementById('init-roleplay-btn').addEventListener('click', function() {
-  // Save the current background before clearing
+ 
   const chatBgElement = document.getElementById('chat-background');
   const currentBgImage = chatBgElement.style.backgroundImage;
   const currentBgFilter = chatBgElement.style.filter;
 
-  // Gather user inputs (including API keys & models)
+ 
   mistralApiKeyGlobal = document.getElementById('mistral-api-key').value.trim();
   mistralModelGlobal  = document.getElementById('mistral-model').value.trim();
   openrouterApiKeyGlobal = document.getElementById('openrouter-api-key').value.trim();
@@ -469,32 +447,30 @@ document.getElementById('init-roleplay-btn').addEventListener('click', function(
     .replace('{{desc}}', characterDesc)
     .replace('{{userdesc}}', userDescription);
 
-  // Reset conversation
+
   conversationHistory = [{ role: "system", content: systemPromptInitial }];
   messageDomList = [];
   selectedMessages = [];
 
-  // Clear the chat window, but preserve background
+  
   document.getElementById('chat-window').innerHTML = "<div id='chat-background'></div>";
   const newBgElement = document.getElementById('chat-background');
   newBgElement.style.backgroundImage = currentBgImage;
   newBgElement.style.filter = currentBgFilter;
 
-  // Insert the initial greeting
+ 
   conversationHistory.push({ role: "assistant", content: initialMessage });
   const bubble = appendMessage(characterName + ": " + initialMessage, 'bot-message');
   addRetryButton(bubble);
 
-  // Switch system prompt to sustained
+ 
   conversationHistory[0] = { role: "system", content: systemPromptSustained };
 
-  // Hide settings panel
+  
   document.getElementById('roleplay-init').style.display = "none";
 });
 
-/***************************************************************
- * INIT APP
- ***************************************************************/
+
 document.addEventListener('DOMContentLoaded', function() {
   initParameterSliders();
 });
