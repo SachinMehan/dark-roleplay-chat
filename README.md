@@ -33,7 +33,7 @@ An **immersive, dark-themed** roleplay chat interface that integrates with **Mis
   Sliders for **Temperature**, **Top P**, **Top K**, **Min P**, **Frequency Penalty**, and **Repetition Penalty**, plus **Max Context** and **Max Response** lengths.
 
 - **Background Customization**  
-  Upload an image and apply a blur effect. The background persists after you initialize a new roleplay.
+  Upload an image and apply a blur effect.
 
 - **Retry & Delete**  
   - **Retry** the most recent AI response.  
@@ -44,5 +44,17 @@ An **immersive, dark-themed** roleplay chat interface that integrates with **Mis
 ## Installation & Setup
 
 1. **Clone or Download** this repository:
-   ```bash
+   
    git clone https://github.com/SachinMehan/dark-roleplay-chat.git
+   dark-roleplay-chat/
+
+   Or download the ZIP and extract it.
+
+2. **File Structure** should look like this:
+   
+      ├─ index.html
+      ├─ style.css
+      └─ script.js
+
+3. **Open** index.html in your favorite browser (Chrome, Firefox, etc.).
+
